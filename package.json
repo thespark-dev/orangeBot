@@ -1,0 +1,16 @@
+{
+  "name": "bishbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bish.js",
+  "dependencies": {
+    "tmi.js": "^1.4.2",
+    "twitch-helix": "^1.0.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon bish.js"
+  },
+  "author": "theSpark",
+  "license": "ISC"
+}
