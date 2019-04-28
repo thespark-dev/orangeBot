@@ -1,3 +1,3 @@
 # sparkBot
 
-### Made by [![@theeSpark](https://github.com/hzeroo/twitch-desktop/blob/master/build/24x24.png?raw=true)](https://twitch.tv/theeSpark).
+### Made by @theeSpark[![](https://static.filehorse.com/icons/messaging-and-chat/twitch-desktop-app-icon-32.png)](https://twitch.tv/theeSpark) - [![](https://github.githubassets.com/favicon.ico)](https://github.com/theeSpark).
