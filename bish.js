@@ -26,7 +26,7 @@ const thefuckingoptions = {
 const client = new tfapi.client(thefuckingoptions);
 //client.connect();
 
-const conncted = false;
+var conncted = false;
 
 function live(user) {
 	return helix.getStreamInfoByUsername(user).then(twitchUser => {
@@ -38,13 +38,29 @@ function live(user) {
 	});
 };
 
-setInterval(() => {
-
 	live("not_orange").then(result => {
 		if(result === true) {
 			console.log("[LIVE] Live!");
 			if(conncted != true){
 				client.connect();
+				conncted = true;
+			}
+		} else {
+			console.log("[LIVE] Offline!");
+			if(conncted === true){
+				client.disconnect();
+			}
+		}
+	});
+
+setInterval(() => {
+
+	live("not_orange").then(result => {
+		if(result === true) {
+			if(conncted != true){
+				console.log("[LIVE] Live!");
+				client.connect();
+				conncted = true;
 			}
 		} else {
 			console.log("[LIVE] Offline!");
@@ -73,28 +89,36 @@ client.on('chat', (channel, userstate, message, self) => {
 		} else {
 			client.action(channel, sender + " you bish!");
 		}
+		
 	} else if (cmd.toLowerCase() == "-gey") {
 		if(args != "") {
 			client.action(channel, args + " you gey!");
 		} else {
 			client.action(channel, sender + " you gey!");
 		}
+
 	} else if (message.toLowerCase().includes("no u")) {
 		client.say(channel, "no u");
+
 	} else if (cmd.toLowerCase() == "-ping") {
 		client.ping().then((data) => {
 			let latenci = JSON.stringify(data[0]);
 			let printthis = latenci.split(".");
 
-			client.say(channel, sender + " -- " + printthis);
+			client.say(channel, sender + " -- " + printthis[1] + " ms");
 		})
-	}
 
-	if(message.includes("bitchute.com")) {
-        if(userstate.mod === false) {
-                client.timeout(channel, sender, 300, "Bitchute er dødt...");
-                client.say(channel, sender + " -- Fuck af med dit bitchute pis... (5 minutters timeout)")
-        }
+	} else if (cmd.toLowerCase() == "-commands" || cmd.toLowerCase() == "-cmds") {
+		client.action(channel, sender + " Her er alle commands til " + thefuckingoptions.identity.username + "!");
+		setTimeout(() => {
+			client.say(channel, "-bish > xD");
+			setTimeout(() => {
+				client.say(channel, "-gey > :)");
+			}, 850);
+				setTimeout(() => {
+					client.say(channel, "-ping > Hvor lang tid det tager botten at kommunikere med Twitch");
+				}, 850);
+		}, 850);
 	}
 
 });
