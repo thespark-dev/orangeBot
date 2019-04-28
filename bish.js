@@ -4,8 +4,8 @@ const fs = require('fs');
 const api1 = require("twitch-helix");
 
 const helix = new api1({
-    clientId: "qmiywydpybqnwv1o84onmjqgc612w9",
-    clientSecret: "9wac7pbph695xk1pu86a5ab87i1tk3"
+    clientId: "qmiywydnahqnwv1o84onmnope612w9",
+    clientSecret: "9wac7pbphnopek1pu86a5not7i1tk3"
 });
 
 const thefuckingoptions = {
