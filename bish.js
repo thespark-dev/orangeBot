@@ -84,7 +84,7 @@ client.on('chat', (channel, userstate, message, self) => {
 	}
 
 	if(message.includes("bitchute.com")) {
-        if(userstate['mod'] === false) {
+        if(userstate.mod === false) {
                 client.timeout(channel, sender, 300, "Bitchute er dødt...");
                 client.say(channel, sender + " -- Fuck af med dit bitchute pis... (5 minutters timeout)")
         }
