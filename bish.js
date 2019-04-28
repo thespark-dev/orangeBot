@@ -81,6 +81,13 @@ client.on('chat', (channel, userstate, message, self) => {
 		}
 	} else if (message.toLowerCase().includes("no u")) {
 		client.say(channel, "no u");
+	} else if (cmd.toLowerCase() == "-ping") {
+		client.ping().then((data) => {
+			let latenci = JSON.stringify(data[0]);
+			let printthis = latenci.split(".");
+
+			client.say(channel, sender + " -- " + printthis);
+		})
 	}
 
 	if(message.includes("bitchute.com")) {
