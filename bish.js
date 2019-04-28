@@ -27,6 +27,7 @@ const client = new tfapi.client(thefuckingoptions);
 //client.connect();
 
 var conncted = false;
+var prefix = fku.prefix;
 
 function live(user) {
 	return helix.getStreamInfoByUsername(user).then(twitchUser => {
@@ -83,14 +84,14 @@ client.on('chat', (channel, userstate, message, self) => {
 	let args = msg.slice(1);
 	let cmd = msg[0];
 
-	if(cmd.toLowerCase() == "-bish") {
+	if(cmd.toLowerCase() == `${preifx}bish`) {
 		if(args != "") {
 			client.action(channel, args + " you bish!");
 		} else {
 			client.action(channel, sender + " you bish!");
 		}
-		
-	} else if (cmd.toLowerCase() == "-gey") {
+
+	} else if (cmd.toLowerCase() == `${preifx}gey`) {
 		if(args != "") {
 			client.action(channel, args + " you gey!");
 		} else {
@@ -100,7 +101,7 @@ client.on('chat', (channel, userstate, message, self) => {
 	} else if (message.toLowerCase().includes("no u")) {
 		client.say(channel, "no u");
 
-	} else if (cmd.toLowerCase() == "-ping") {
+	} else if (cmd.toLowerCase() == `${preifx}ping`) {
 		client.ping().then((data) => {
 			let latenci = JSON.stringify(data[0]);
 			let printthis = latenci.split(".");
@@ -108,15 +109,15 @@ client.on('chat', (channel, userstate, message, self) => {
 			client.say(channel, sender + " -- " + printthis[1] + " ms");
 		})
 
-	} else if (cmd.toLowerCase() == "-commands" || cmd.toLowerCase() == "-cmds") {
+	} else if (cmd.toLowerCase() == `${preifx}commands` || cmd.toLowerCase() == `${preifx}cmds`) {
 		client.action(channel, sender + " Her er alle commands til " + thefuckingoptions.identity.username + "!");
 		setTimeout(() => {
-			client.say(channel, "-bish > xD");
+			client.say(channel, `${preifx}bish > xD`);
 			setTimeout(() => {
-				client.say(channel, "-gey > :)");
+				client.say(channel, `${preifx}gey > :)`);
 			}, 850);
 				setTimeout(() => {
-					client.say(channel, "-ping > Hvor lang tid det tager botten at kommunikere med Twitch");
+					client.say(channel, `${preifx}ping > Hvor lang tid det tager botten at kommunikere med Twitch`);
 				}, 850);
 		}, 850);
 	}
