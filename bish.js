@@ -86,18 +86,18 @@ client.on('chat', (channel, userstate, message, self) => {
 	let args = msg.slice(1);
 	let cmd = msg[0];
 
-	if(cmd.toLowerCase() == `${preifx}bish`) {
+	if(cmd.toLowerCase() == `${preifx}sej`) {
 		if(args != "") {
-			client.action(channel, args + " you bish!");
+			client.action(channel, args + "du sej!");
 		} else {
-			client.action(channel, sender + " you bish!");
+			client.action(channel, sender + " du sej!");
 		}
 
-	} else if (cmd.toLowerCase() == `${preifx}gey`) {
+	} else if (cmd.toLowerCase() == `${preifx}dum`) {
 		if(args != "") {
-			client.action(channel, args + " you gey!");
+			client.action(channel, args + " du dum!");
 		} else {
-			client.action(channel, sender + " you gey!");
+			client.action(channel, sender + " du dum!");
 		}
 
 	} else if (message.toLowerCase().includes("no u")) {
