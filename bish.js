@@ -121,16 +121,16 @@ client.on('chat', (channel, userstate, message, self) => {
       }
 
 		})
-  	} else if (cmd.toLowerCase() == `${preifx}commands` || cmd.toLowerCase() == `${preifx}cmds`) {
+  	} else if (cmd.toLowerCase() == `${prefix}commands` || cmd.toLowerCase() == `${prefix}cmds`) {
 		client.action(channel, sender + " Her er alle commands til " + joinchnl + "!");
 		setTimeout(() => {
-			client.say(channel, `${preifx}bish > :)`);
+			client.say(channel, `${prefix}bish > :)`);
 			setTimeout(() => {
-				client.say(channel, `${preifx}gey > :)`);
+				client.say(channel, `${prefix}gey > :)`);
 				setTimeout(() => {
-					client.say(channel, `${preifx}ping > Hvor lang tid det tager botten at kommunikere med Twitch`);
+					client.say(channel, `${prefix}ping > Hvor lang tid det tager botten at kommunikere med Twitch`);
 					setTimeout(() => {
-						client.say(channel, `${preifx}uptime > Hvor lang tid streamen har kørt.`);
+						client.say(channel, `${prefix}uptime > Hvor lang tid streamen har kørt.`);
 					}, 850);
 				}, 850);
 			}, 850);
@@ -159,6 +159,19 @@ client.on('chat', (channel, userstate, message, self) => {
 	        client.say(channel, `${sender} - ${joinchnl} er Offline.`);
 	      }
 	    })
+	} else if (message.toLowerCase().includes("join") || message.toLowerCase().includes("joiner")) {
+		if (!userstate.mod){
+			client.say(channel, `${sender} - Man kan join ved at follow og add Wild_Pølle!`);
+		}
+	} else if (cmd.toLowerCase() == `${prefix}followers`) {
+		client.api({
+		    url: `https://api.twitch.tv/kraken/channels/${joinchnl}`,
+		    headers: {
+		        "Client-ID": "qmiywydpybqnwv1o84onmjqgc612w9"
+		    }
+		}, (err, res, body) => {
+			if(err) { console.log(err); } else { client.say(channel, `${sender} - ${body.followers} followers`); }
+		});
 	}
 
 });
