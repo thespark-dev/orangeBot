@@ -8,6 +8,8 @@ const helix = new api1({
     clientSecret: "9wac7pbphnopek1pu86a5not7i1tk3"
 });
 
+var joinchnl = ''
+
 const thefuckingoptions = {
 	options: {
 		debug: true
@@ -20,7 +22,7 @@ const thefuckingoptions = {
 		username: 'theeSparkBot', // Bot Username
 		password: fku.token
 	},
-	channels: [ 'not_orange' ]
+	channels: [ joinchnl ]
 };
 
 const client = new tfapi.client(thefuckingoptions);
@@ -39,7 +41,7 @@ function live(user) {
 	});
 };
 
-	live("not_orange").then(result => {
+	live(joinchnl).then(result => {
 		if(result === true) {
 			console.log("[LIVE] Live!");
 			if(conncted != true){
@@ -56,7 +58,7 @@ function live(user) {
 
 setInterval(() => {
 
-	live("not_orange").then(result => {
+	live(joinchnl).then(result => {
 		if(result === true) {
 			if(conncted != true){
 				console.log("[LIVE] Live!");
@@ -106,7 +108,7 @@ client.on('chat', (channel, userstate, message, self) => {
 			let latenci = JSON.stringify(data[0]);
 			let printthis = latenci.split(".");
 
-			client.say(channel, sender + " -- " + printthis[1] + " ms");
+			client.say(channel, sender + " - " + printthis[1] + " ms");
 		})
 
 	} else if (cmd.toLowerCase() == `${preifx}commands` || cmd.toLowerCase() == `${preifx}cmds`) {
