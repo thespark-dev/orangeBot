@@ -8,7 +8,7 @@ const helix = new api1({
     clientSecret: "9wac7pbphnopek1pu86a5not7i1tk3"
 });
 
-var joinchnl = ''
+var joinchnl = 'mariusfn2';
 
 const thefuckingoptions = {
 	options: {
@@ -26,7 +26,6 @@ const thefuckingoptions = {
 };
 
 const client = new tfapi.client(thefuckingoptions);
-//client.connect();
 
 var conncted = false;
 var prefix = fku.prefix;
@@ -41,20 +40,20 @@ function live(user) {
 	});
 };
 
-	live(joinchnl).then(result => {
-		if(result === true) {
-			console.log("[LIVE] Live!");
-			if(conncted != true){
-				client.connect();
-				conncted = true;
-			}
-		} else {
-			console.log("[LIVE] Offline!");
-			if(conncted === true){
-				client.disconnect();
-			}
+live(joinchnl).then(result => {
+	if(result === true) {
+		console.log("[LIVE] Live!");
+		if(conncted != true){
+			client.connect();
+			conncted = true;
 		}
-	});
+	} else {
+		console.log("[LIVE] Offline!");
+		if(conncted === true){
+			client.disconnect();
+		}
+	}
+});
 
 setInterval(() => {
 
@@ -77,6 +76,10 @@ setInterval(() => {
 
 process.stdin.resume();
 
+// client.on("connected", (addr,port) => {
+//   client.action(joinchnl,  ` er kommet ind i chatrummet!`);
+// });
+
 client.on('chat', (channel, userstate, message, self) => {
 	if(self) return;
 
@@ -86,42 +89,76 @@ client.on('chat', (channel, userstate, message, self) => {
 	let args = msg.slice(1);
 	let cmd = msg[0];
 
-	if(cmd.toLowerCase() == `${preifx}sej`) {
+	if(cmd.toLowerCase() == `${prefix}bish`) {
 		if(args != "") {
-			client.action(channel, args + "du sej!");
+			client.action(channel, args + " you bish!");
 		} else {
-			client.action(channel, sender + " du sej!");
+			client.action(channel, sender + " you bish!");
 		}
 
-	} else if (cmd.toLowerCase() == `${preifx}dum`) {
+	} else if (cmd.toLowerCase() == `${prefix}gey`) {
 		if(args != "") {
-			client.action(channel, args + " du dum!");
+			client.action(channel, args + " you gey!");
 		} else {
-			client.action(channel, sender + " du dum!");
+			client.action(channel, sender + " you gey!");
 		}
 
 	} else if (message.toLowerCase().includes("no u")) {
 		client.say(channel, "no u");
 
-	} else if (cmd.toLowerCase() == `${preifx}ping`) {
-		client.ping().then((data) => {
+	} else if (cmd.toLowerCase() == `${prefix}ping`) {
+
+	  client.ping().then((data) => {
+
 			let latenci = JSON.stringify(data[0]);
+
 			let printthis = latenci.split(".");
 
-			client.say(channel, sender + " - " + printthis[1] + " ms");
-		})
+      if(printthis[0] > 0) {
+        client.say(channel, sender + " - " + latenci + " sekunder");
+      } else {
+			  client.say(channel, sender + " - ." + printthis[1] + " ms");
+      }
 
-	} else if (cmd.toLowerCase() == `${preifx}commands` || cmd.toLowerCase() == `${preifx}cmds`) {
+		})
+  	} else if (cmd.toLowerCase() == `${preifx}commands` || cmd.toLowerCase() == `${preifx}cmds`) {
 		client.action(channel, sender + " Her er alle commands til " + joinchnl + "!");
 		setTimeout(() => {
-			client.say(channel, `${preifx}sej > xD`);
+			client.say(channel, `${preifx}bish > :)`);
 			setTimeout(() => {
-				client.say(channel, `${preifx}dum > :)`);
-			}, 850);
+				client.say(channel, `${preifx}gey > :)`);
 				setTimeout(() => {
 					client.say(channel, `${preifx}ping > Hvor lang tid det tager botten at kommunikere med Twitch`);
+					setTimeout(() => {
+						client.say(channel, `${preifx}uptime > Hvor lang tid streamen har kørt.`);
+					}, 850);
 				}, 850);
+			}, 850);
 		}, 850);
+	} else if (cmd.toLowerCase() == `${prefix}uptime`) {
+	    helix.getStreamInfoByUsername(joinchnl).then(twitchUser => {
+	      if(twitchUser != null) {
+
+	        var date1 = new Date(twitchUser.started_at);
+	        var date2 = new Date()
+
+	        var res = Math.abs(date1 - date2) / 1000;
+
+	        var hrs = Math.floor(res / 3600) % 24;
+	        var min = Math.floor(res / 60) % 60;
+	        var sec = Math.floor(res % 60);
+
+	        if (hrs < 10) {hrs = "0"+hrs;}
+	        if (min < 10) {min = "0"+min;}
+	        if (sec < 10) {sec = "0"+sec;}
+
+	        if (hrs < 1) { client.say(channel, `${sender} - ${joinchnl} har været live I ${min} minutter ${sec} sekunder`); }
+	        else { client.say(channel, `${sender} - ${joinchnl} har været live I ${hrs} timer ${min} minutter ${sec} sekunder`); }
+	      } else {
+	        console.log("Offline");
+	        client.say(channel, `${sender} - ${joinchnl} er Offline.`);
+	      }
+	    })
 	}
 
 });
