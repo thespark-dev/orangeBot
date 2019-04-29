@@ -8,7 +8,7 @@ const helix = new api1({
     clientSecret: "9wac7pbphnopek1pu86a5not7i1tk3"
 });
 
-var joinchnl = 'mariusfn2';
+var joinchnl = '';
 
 const thefuckingoptions = {
 	options: {
