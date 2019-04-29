@@ -114,9 +114,9 @@ client.on('chat', (channel, userstate, message, self) => {
 	} else if (cmd.toLowerCase() == `${preifx}commands` || cmd.toLowerCase() == `${preifx}cmds`) {
 		client.action(channel, sender + " Her er alle commands til " + joinchnl + "!");
 		setTimeout(() => {
-			client.say(channel, `${preifx}bish > xD`);
+			client.say(channel, `${preifx}sej > xD`);
 			setTimeout(() => {
-				client.say(channel, `${preifx}gey > :)`);
+				client.say(channel, `${preifx}dum > :)`);
 			}, 850);
 				setTimeout(() => {
 					client.say(channel, `${preifx}ping > Hvor lang tid det tager botten at kommunikere med Twitch`);
