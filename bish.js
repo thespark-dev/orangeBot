@@ -112,7 +112,7 @@ client.on('chat', (channel, userstate, message, self) => {
 		})
 
 	} else if (cmd.toLowerCase() == `${preifx}commands` || cmd.toLowerCase() == `${preifx}cmds`) {
-		client.action(channel, sender + " Her er alle commands til " + thefuckingoptions.identity.username + "!");
+		client.action(channel, sender + " Her er alle commands til " + joinchnl + "!");
 		setTimeout(() => {
 			client.say(channel, `${preifx}bish > xD`);
 			setTimeout(() => {
