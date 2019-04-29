@@ -76,9 +76,9 @@ setInterval(() => {
 
 process.stdin.resume();
 
-// client.on("connected", (addr,port) => {
-//   client.action(joinchnl,  ` er kommet ind i chatrummet!`);
-// });
+client.on("connected", (addr,port) => {
+  client.action(joinchnl,  ` er kommet ind i chatrummet!`);
+});
 
 client.on('chat', (channel, userstate, message, self) => {
 	if(self) return;
